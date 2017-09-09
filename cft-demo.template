@@ -100,8 +100,24 @@
           ]
         },
         "Code": {
-          "S3Bucket": "cft-demo-code-bucket",
-          "S3Key": "cft-demo-lambda-function.zip"
+          "ZipFile": {
+            "Fn::Join": [
+              "\n",
+              [
+                "exports.handler = function (event) {",
+                "   if (event.Records && event.Records.length > 0) {",
+                "     let record = event.Records[0];",
+                "     if (record.EventSource === 'aws:sns') {",
+                "       let snsMessage = record.Sns.Message;",
+                "       snsMessage = JSON.parse(snsMessage);",
+                "       let s3Object = snsMessage.Records[0].s3;",
+                "       console.info('Bucket:', s3Object.bucket.name, 'Key:', s3Object.object.key);",
+                "     }",
+                "   }",
+                "};"
+              ]
+            ]
+          }
         },
         "Runtime": "nodejs4.3"
       }
