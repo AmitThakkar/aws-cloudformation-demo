@@ -1,6 +1,6 @@
 # aws-cloudformation-demo
 
-This is demo of creating aws resource/stack with aws cloud-formation
+This is demo of creating aws resource/stack with aws cloud-formation.
 
 Run below command:
 
